@@ -11,8 +11,8 @@ Visual Studio 2013 Premium Setup
 
 Go ahead and make sure you're on **Update 3** and use **VS2013 Premium**.  Also, here's the extensions I have installed:
 
-* Web Essentials
-* Resharper (for bugs/todos in code)
+* **Web Essentials for Update 3**
+* **Resharper** (for bugs/todos in code)
 
 > **Note**: I found this article pretty helpful on setting up my connection to the GitHub repo: http://msdn.microsoft.com/en-us/library/hh850445.aspx#remote_3rd_party_connect_clone
 
