@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NoobDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GemImages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Gem" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Url" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gems">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="300" />
+          <Property Name="Rarity" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Shine" Type="int" />
+          <Property Name="Color" Type="nchar" MaxLength="10" />
+          <Property Name="Faces" Type="int" />
+        </EntityType>
+        <EntityType Name="GemsTable">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="300" />
+          <Property Name="Rarity" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Shine" Type="int" />
+          <Property Name="Color" Type="nchar" MaxLength="10" />
+          <Property Name="Faces" Type="int" />
+          <Property Name="Images" Type="image" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NoobDB.dbo.test View 1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="test View 1">
+          <Key>
+            <PropertyRef Name="Gem" />
+            <PropertyRef Name="Url" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="nchar" MaxLength="100" />
+          <Property Name="Gem" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Url" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_GemImages_Gems">
+          <End Role="Gems" Type="Self.Gems" Multiplicity="1" />
+          <End Role="GemImages" Type="Self.GemImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gems">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="GemImages">
+              <PropertyRef Name="Gem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NoobDBModelStoreContainer">
+          <EntitySet Name="GemImages" EntityType="Self.GemImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gems" EntityType="Self.Gems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GemsTable" EntityType="Self.GemsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="test View 1" EntityType="Self.test View 1" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [test View 1].[Name] AS [Name], 
+    [test View 1].[Gem] AS [Gem], 
+    [test View 1].[Url] AS [Url], 
+    [test View 1].[ID] AS [ID]
+    FROM [dbo].[test View 1] AS [test View 1]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_GemImages_Gems" Association="Self.FK_GemImages_Gems">
+            <End Role="Gems" EntitySet="Gems" />
+            <End Role="GemImages" EntitySet="GemImages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NoobDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GemImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Gem" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Gem1" Relationship="Self.FK_GemImages_Gems" FromRole="GemImages" ToRole="Gems" />
+        </EntityType>
+        <EntityType Name="Gem">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+          <Property Name="Rarity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Shine" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Faces" Type="Int32" />
+          <NavigationProperty Name="GemImages" Relationship="Self.FK_GemImages_Gems" FromRole="Gems" ToRole="GemImages" />
+        </EntityType>
+        <EntityType Name="GemsTable">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+          <Property Name="Rarity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Shine" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Faces" Type="Int32" />
+          <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="test_View_1">
+          <Key>
+            <PropertyRef Name="Gem" />
+            <PropertyRef Name="Url" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Gem" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_GemImages_Gems">
+          <End Role="Gems" Type="Self.Gem" Multiplicity="1" />
+          <End Role="GemImages" Type="Self.GemImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gems">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="GemImages">
+              <PropertyRef Name="Gem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NoobDBEntitiesNew" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GemImages" EntityType="Self.GemImage" />
+          <EntitySet Name="Gems" EntityType="Self.Gem" />
+          <EntitySet Name="GemsTables" EntityType="Self.GemsTable" />
+          <EntitySet Name="test_View_1" EntityType="Self.test_View_1" />
+          <AssociationSet Name="FK_GemImages_Gems" Association="Self.FK_GemImages_Gems">
+            <End Role="Gems" EntitySet="Gems" />
+            <End Role="GemImages" EntitySet="GemImages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NoobDBModelStoreContainer" CdmEntityContainer="NoobDBEntitiesNew">
+          <EntitySetMapping Name="GemImages">
+            <EntityTypeMapping TypeName="NoobDBModel.GemImage">
+              <MappingFragment StoreEntitySet="GemImages">
+                <ScalarProperty Name="Gem" ColumnName="Gem" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gems">
+            <EntityTypeMapping TypeName="NoobDBModel.Gem">
+              <MappingFragment StoreEntitySet="Gems">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Rarity" ColumnName="Rarity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Shine" ColumnName="Shine" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Faces" ColumnName="Faces" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GemsTables">
+            <EntityTypeMapping TypeName="NoobDBModel.GemsTable">
+              <MappingFragment StoreEntitySet="GemsTable">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Rarity" ColumnName="Rarity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Shine" ColumnName="Shine" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Faces" ColumnName="Faces" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="test_View_1">
+            <EntityTypeMapping TypeName="NoobDBModel.test_View_1">
+              <MappingFragment StoreEntitySet="test View 1">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Gem" ColumnName="Gem" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
