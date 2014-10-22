@@ -23,7 +23,9 @@
       this.tab = setTab;
     };
   });
-
+  app.controller('DriverController', function () {
+      this.individuals = drivers;
+  });
   
 
   app.controller("ReviewController", function(){
@@ -130,5 +132,63 @@
           author: "nat@example.org"
         }]
     }
+  ];
+
+  var drivers = [
+  {
+      firstName: 'John',
+      lastName: 'Smith',
+      location: '123 Alfred St.',
+      deliveryRadius: '5',
+      likesReceived: '12',
+      jobsReceived: '13',
+      dateStarted: '10-01-2014',
+      profilePic: "images/js.jpg"
+  }, {
+      firstName: 'Fred',
+      lastName: 'Wootzen',
+      location: '123 Diggidy St.',
+      deliveryRadius: '10',
+      likesReceived: '5',
+      jobsReceived: '30',
+      dateStarted: '5-09-2014',
+      profilePic: "images/fw.jpg"
+  }, {
+      firstName: 'Charles',
+      lastName: 'BoonDoggle',
+      location: '555 Usher St.',
+      deliveryRadius: '6',
+      likesReceived: '7',
+      jobsReceived: '7',
+      dateStarted: '09-01-2014',
+      profilePic: "images/cb.jpg"
+  }, {
+      firstName: 'Fezic',
+      lastName: 'Giante',
+      location: '999 Row St.',
+      deliveryRadius: '8',
+      likesReceived: '5',
+      jobsReceived: '5',
+      dateStarted: '02-01-2014',
+      profilePic: "images/fg.jpg"
+  }, {
+      firstName: 'Sarah',
+      lastName: 'Johnson',
+      location: '509 Morisson St.',
+      deliveryRadius: '9',
+      likesReceived: '30',
+      jobsReceived: '27',
+      dateStarted: '04-14-2014',
+      profilePic: "images/sj.jpeg"
+  }, {
+      firstName: 'Jennifer',
+      lastName: 'Amble',
+      location: '476 Neary St.',
+      deliveryRadius: '10',
+      likesReceived: '18',
+      jobsReceived: '18',
+      dateStarted: '07-21-2014',
+      profilePic: "images/ja.jpg"
+  },
   ];
 })();

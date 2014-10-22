@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html ng-app="gemStore">
+  <head>
+    <title>Noobs can't Triforce</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/libraries/angular.min.js"></script>
+    <script src="/js/libraries/jQuery2/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/app/app.js"></script>
+  </head>
+  <body ng-controller="DriverController as driver">
+    <div class="list-group">
+        <div class="list-group-item" ng-repeat="driver in driver.individuals">
+            <p>{{driver.firstName}}</p>
+            <p>{{driver.lastName}}</p>
+            <p>{{driver.location}}</p>
+            <p>{{driver.deliveryRadius}}</p>
+            <p>{{driver.likesReceived}}</p>
+            <p>{{driver.jobsReceived}}</p>
+            <p>{{driver.dateStarted}}</p>
+            <img ng-src="{{driver.profilePic}}" />
+        </div>
+    </div>
+  </body>
+</html>
